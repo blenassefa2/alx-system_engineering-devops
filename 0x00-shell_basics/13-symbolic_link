@@ -1,2 +1,2 @@
 #!/bin/bash
-ln -s "/bin/ls" " __ls__"
+ln --symbollic "/bin/ls" " _ls_"
