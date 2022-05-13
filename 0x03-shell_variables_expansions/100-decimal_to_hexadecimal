@@ -1,0 +1,2 @@
+#!/bin/basih
+printf '%x\n' $DECIMAL
