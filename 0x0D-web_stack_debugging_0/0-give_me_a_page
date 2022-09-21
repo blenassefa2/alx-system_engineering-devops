@@ -1,4 +1,4 @@
 #!/usr/bin/bash
 # restart apache to make t=if function better
 
-service apache2 start
+sudo service apache2 start
