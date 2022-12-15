@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+#Bash script that will display information about sub domains
+DOM=$1
+ARG=$#
+myfunc() {
+        SUBDOMAIN=("www" "lb-01" "web-01" "web-02")
+        if [ "$ARG" == 1 ];
+        then
+                for sub in "${SUBDOMAIN[@]}"; do
+                        URL="$sub.$DOM"
+			RECORD=$(dig "$URL" | grep -A1 'ANSWER SECTION:' | awk '{printf "%s", $4}')
+			IP=$(dig "$URL" | grep -A1 'ANSWER SECTION:' | awk '{printf "%s", $5}')
+                        echo "The subdomain $sub is a $RECORD record and points to $IP"
+                done
+        fi
+}
+if [ "$#" == 1 ];
+then
+        myfunc
+elif [ "$#" == 2 ];
+then
+	RECORD=$(dig "$2.$1" | grep -A1 'ANSWER SECTION:' | awk '{printf "%s", $4}')
+	IP=$(dig "$2.$1" | grep -A1 'ANSWER SECTION:' | awk '{printf "%s", $5}')
+        echo "The subdomain $2 is a $RECORD record and points to $IP"
+fi        
